@@ -1,0 +1,12 @@
+Usecases:
+--------
+-> As a user, I should be able to type my message, send it and receive some sort of confirmation that it is sent.
+->
+//Please add more usecases here
+
+--------
+Document rules:
+	- Use correct spelling ( English only! )
+	- Profanity will not be allowed, the use of which will cause immediate suspention.
+	- Make sure the document is ready for the next person to use after you are done.
+	- Never delete an entry that is not yours. Rather place a comment next to the line/s that you are unhappy with! Standard Java commenting please.
