@@ -2,7 +2,7 @@
 Relay chat system created on the Java platform.
 
 Version 1.0 Requirements:
-|                                                       Feature                                                       	| Completed?(Y/N) 	|
+|                                                       Feature                                                       	| Completed?(Y/N)|
 |:-------------------------------------------------------------------------------------------------------------------:	|:---------------:|
 | Java based project.                                                                                                 	|        Y       |
 | GUI based program (Desktop).                                                                                        	|        N       |
