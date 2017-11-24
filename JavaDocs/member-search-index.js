@@ -1,1 +1,1 @@
-memberSearchIndex = [{"p":"com.softwareological.obsidian_robot.Protocol","c":"OR_Protocol","l":"OR_Protocol()"}]
+memberSearchIndex = [{"p":"com.softwareological.obsidian_robot.Protocol","c":"OR_Protocol","l":"LastReponse()"},{"p":"com.softwareological.obsidian_robot.Protocol","c":"OR_Protocol","l":"OR_Protocol()"},{"p":"com.softwareological.obsidian_robot.Protocol","c":"OR_Protocol","l":"ProcessMessage(String)","url":"ProcessMessage-java.lang.String-"}]
