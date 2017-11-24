@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"com.softwareological.obsidian_robot.Protocol"}]
+packageSearchIndex = [{"l":"com.softwareological.obsidian_robot.Protocol"},{"l":"com.softwareological.obsidian_robot.TPC"}]
