@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"com.softwareological.obsidian_robot.TPC","l":"EchoClient"},{"p":"com.softwareological.obsidian_robot.TPC","l":"EchoServer"},{"p":"com.softwareological.obsidian_robot.Protocol","l":"OR_Protocol"}]
+typeSearchIndex = [{"p":"com.softwareological.obsidian_robot.Protocol","l":"OR_Protocol"},{"p":"com.softwareological.obsidian_robot.TPC","l":"ProtocolTest_ClientApp"},{"p":"com.softwareological.obsidian_robot.TPC","l":"ProtocolTest_ServerApp"}]
