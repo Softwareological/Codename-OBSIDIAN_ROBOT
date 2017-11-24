@@ -7,9 +7,12 @@ package com.softwareological.obsidian_robot.Protocol;
  */
 public class OR_Protocol {
 
-	private static final int INITIAL_STATE = 1;
-	private static final int INTERACTING_STATE = 2;
-	private static final int FINAL_STATE = 3;
+	/** The initial state of the engine. Client and Server have not communicated yet **/
+	public static final int INITIAL_STATE = 1;
+	/** The interacting state indicates that the Client and Server are in conversation**/
+	public static final int INTERACTING_STATE = 2;
+	/** The final state indicates the closure of the communication channel between Client and Server**/
+	public static final int FINAL_STATE = 3;
 	
 	private String response;
 	private int currentState;
@@ -59,13 +62,24 @@ public class OR_Protocol {
 	}
 	
 	/**
-	 * Returns the last reponse from engine
+	 * Returns the last reponse from engine.
 	 * 
-	 * @return The last reponse that was sent from the protocol engine
+	 * @return The last reponse that was sent from the protocol engine.
 	 * @version 1.0
 	 * @author Kaylen Travis Pillay
 	 */
-	public String LastReponse() {
+	public String GetLastReponse() {
 		return response;
+	}
+	
+	/**
+	 * Returns the current state of the protocol engine.
+	 * 
+	 * @return The current state of the engine
+	 * @version 1.0
+	 * @author Kaylen Travis Pillay
+	 */
+	public int GetCurrentState() {
+		return currentState;
 	}
 }
