@@ -15,7 +15,7 @@ __***Relay chat system created on the Java platform.***__
 | Feature | Completed?(Y/N) |
 |:-------------------------------------------------------------------------------------------------------------------:|:---------------:|
 | Java based project. | Y |
-| GUI based program (Desktop). | N |
+| GUI based program (Desktop). | Y |
 | Server has a log file system for monitoring and debugging. | N |
 | When a client sends a message, all known clients receive it. | N |
 | Clients announce their presence to the server once; before they can send or receive messages | N |
