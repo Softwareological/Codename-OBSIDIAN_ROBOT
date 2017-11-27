@@ -35,7 +35,7 @@ public class ProtocolTest_ClientApp {
 		 * command-prompt and type 'ipconfig'. Look for your IPv4 address and
 		 * assign that value to the ipAddress variable.
 		 */
-		String ipAddress = "ENTER THE IP_ADDRESS OF THE SERVER";
+		String ipAddress = "192.168.1.40";
 		int portNumber = 4444;
 		
 		try(
@@ -46,12 +46,13 @@ public class ProtocolTest_ClientApp {
 			)
 		{
 			String message;
-			System.out.println(bufferedReader.readLine());
-			
+			printWriter.println(scanner.nextLine());
+			Thread thread = new Thread(new RecieveMessages(bufferedReader));
+			thread.start();
 			while((message = scanner.nextLine()) != null) {
 				printWriter.println(message);
-				System.out.println(bufferedReader.readLine());
 				if(message.equals("Bye.")) {
+					
 					break;
 				}
 			}
@@ -59,6 +60,34 @@ public class ProtocolTest_ClientApp {
 		catch(IOException e) {
 			System.out.println("Unable to connect to the server.");
 		}
+	}
+	
+	
+	private static class RecieveMessages implements Runnable{
+		
+		private BufferedReader bufferedReader;
+		
+		public RecieveMessages(BufferedReader br) {
+			bufferedReader = br;
+		}
+		
+		@Override
+		public void run() {
+			boolean finished = false;
+			while(!finished) {
+				try {
+					String message = bufferedReader.readLine();
+					if(message != null) {
+						System.out.println(message);
+					}
+				} catch (IOException e) {
+					finished = true;
+					break;
+				}
+			}
+			
+		}
+		
 	}
 
 }
