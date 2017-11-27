@@ -16,10 +16,10 @@ __***Relay chat system created on the Java platform.***__
 |:-------------------------------------------------------------------------------------------------------------------:|:---------------:|
 | Java based project. | Y |
 | GUI based program (Desktop). | Y |
-| Server has a log file system for monitoring and debugging. | N |
-| When a client sends a message, all known clients receive it. | N |
-| Clients announce their presence to the server once; before they can send or receive messages | N |
+| Server has a log file system for monitoring and debugging. | Y |
+| When a client sends a message, all known clients receive it. | Y |
+| Clients announce their presence to the server once; before they can send or receive messages | Y |
 | Clients can request a list of clients who are online at any point in time after they have announced their presence. | N |
-| Clients send messages to the server. The server multi-casts the message to all known clients. | N |
-| Clients announce their departure to the server. | N |
-| If the server shuts down, it announces it's unavailability. | N |
+| Clients send messages to the server. The server multi-casts the message to all known clients. | Y |
+| Clients announce their departure to the server. | Y |
+| If the server shuts down, it announces it's unavailability. | Y |
