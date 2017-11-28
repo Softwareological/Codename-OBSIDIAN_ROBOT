@@ -1,6 +1,8 @@
 # Codename-OBSIDIAN_ROBOT
 __***Relay chat system created on the Java platform.***__
 
+## [Download the latest version](https://github.com/Softwareological/Codename-OBSIDIAN_ROBOT/releases/latest)
+
 ## **Project Phases:**
 
 | Project Phase | Current Status |
