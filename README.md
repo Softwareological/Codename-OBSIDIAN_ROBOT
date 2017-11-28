@@ -24,3 +24,19 @@ __***Relay chat system created on the Java platform.***__
 | Clients send messages to the server. The server multi-casts the message to all known clients. | Y |
 | Clients announce their departure to the server. | Y |
 | If the server shuts down, it announces it's unavailability. | Y |
+
+
+## **Version 1.1 Requirements:**
+
+| Requirements | Completed?(Y/N) |
+|:------------------------------------------------------------------:|:---------------:|
+| Private chat with individual users. | N |
+| Password authentication. | N |
+| Registration process | N |
+| Administration ( banning users, viewing log file, creating rooms ) | N |
+| Multiple chat-rooms | N |
+| Profanity filtering | N |
+| Voting polls (e.g. democratic banning of unwanted users) | N |
+| Significant GUI design | N |
+| Server messages are displayed to the user. | N |
+| List all clients in the chat-room | N |
