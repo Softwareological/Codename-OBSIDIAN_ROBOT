@@ -53,6 +53,7 @@ public class ServerCommunicationThread implements Runnable{
 			while((message = bufferedReader.readLine()) != null) {
 				if(message.equals("Bye.")) {
 					CastToClients("has disconnected from server.");
+					RecordEntryInLog("Client: " + username + " has disconnected");
 					break;
 				}
 				else {

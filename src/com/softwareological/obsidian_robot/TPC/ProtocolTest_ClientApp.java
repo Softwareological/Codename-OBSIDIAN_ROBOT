@@ -35,7 +35,7 @@ public class ProtocolTest_ClientApp {
 		 * command-prompt and type 'ipconfig'. Look for your IPv4 address and
 		 * assign that value to the ipAddress variable.
 		 */
-		String ipAddress = "192.168.1.40";
+		String ipAddress = "ENTER YOUR SERVER ADDRESS";
 		int portNumber = 4444;
 		
 		try(

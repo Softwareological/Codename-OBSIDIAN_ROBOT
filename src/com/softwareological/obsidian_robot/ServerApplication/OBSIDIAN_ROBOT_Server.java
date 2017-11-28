@@ -18,6 +18,7 @@ public class OBSIDIAN_ROBOT_Server {
 
 		try(ServerSocket serverSocket = new ServerSocket(portNumber);)
 		{
+			ServerCommunicationThread.RecordEntryInLog("\n==================\nNew Server Session\n==================\n");
 			while(true) {
 				Thread thread = new Thread(new ServerCommunicationThread(serverSocket.accept()));
 				thread.start();
