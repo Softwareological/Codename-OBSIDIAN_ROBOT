@@ -206,11 +206,12 @@ public class OBSIDIAN_ROBOT {
 		scrollPane_1.setViewportView(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setEnabled(false);
-		textArea.setLineWrap(true);
-		panel_3.add(textArea, BorderLayout.CENTER);
+		JTextArea txtrFeatureComingSoon = new JTextArea();
+		txtrFeatureComingSoon.setWrapStyleWord(true);
+		txtrFeatureComingSoon.setLineWrap(true);
+		txtrFeatureComingSoon.setText("\r\n\r\nFeature coming soon!  V1.1 includes this feature and many others. To find out more, check out this projects GitHub Page ( Help -> Developers -> GitHub Page ).\r\n\r\nPlease take the time to rate this chat application. Your feedback helps the developers grow and produce better software, thank you.\r\n\r\nSend you feedback to softwareological@outlook.com");
+		txtrFeatureComingSoon.setEditable(false);
+		panel_3.add(txtrFeatureComingSoon, BorderLayout.CENTER);
 
 		long checkPeriod = 5;
 		ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
@@ -329,12 +330,8 @@ public class OBSIDIAN_ROBOT {
 		btnSend.setEnabled(false);
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO: Implement the message repaint test
-				JLabel newMessage = new JLabel("username \u00BB " + txtAreaMessage.getText());
-				newMessage.setForeground(Color.decode("#228B22"));
-				chatMessagePanel.add(newMessage);
-				contentFrame.validate();
-				contentFrame.repaint();
+				InterfaceLogic.SendMessage(contentFrame, txtAreaMessage.getText());
+				txtAreaMessage.setText("");
 			}
 		});
 		btnSend.setBackground(new Color(51, 255, 0));
@@ -343,6 +340,7 @@ public class OBSIDIAN_ROBOT {
 		mntmConnectToServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(InterfaceLogic.ConnectClientToServer(contentFrame)) {
+				
 					lblServerStatus.setText("Connected");
 					lblServerStatus.setForeground(Color.decode("#228B22"));
 					mntmListPeopleIn.setVisible(true);
@@ -353,6 +351,10 @@ public class OBSIDIAN_ROBOT {
 					
 					btnSend.setEnabled(true);
 					txtAreaMessage.setEnabled(true);
+					lblUsername.setText(InterfaceLogic.username);
+					
+					Thread thread = new Thread(new InterfaceLogic.MessageReaderThread(chatMessagePanel, contentFrame));
+					thread.start();
 				}
 			}
 		});
@@ -370,6 +372,7 @@ public class OBSIDIAN_ROBOT {
 					
 					btnSend.setEnabled(false);
 					txtAreaMessage.setEnabled(false);
+					lblUsername.setText("Not Connected");
 				}
 			}
 		});

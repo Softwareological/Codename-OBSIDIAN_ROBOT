@@ -8,13 +8,17 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * Application Interface Logic.
@@ -24,6 +28,22 @@ import javax.swing.JOptionPane;
  * @version 1.0
  */
 public abstract class InterfaceLogic {
+	
+	private static Socket clientConnectSocket;
+	private static PrintWriter out;
+	private static BufferedReader in;
+	private final static String HOST_NAME = "ENTER YOUR SERVER ADDRESS";
+	private final static int PORT_NUMBER = 4444;
+	public static String username;
+	
+	public static void SendMessage(Component component,String message) {
+		try {
+			out.println(message);
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(component, "We could not send you message, try again", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 	
 	/**
 	 * Logs the client off the server.
@@ -35,10 +55,21 @@ public abstract class InterfaceLogic {
 	 * @version 1.0
 	 */
 	public static boolean LogoffClient(Component component) {
-		//TODO: Implement the log off method
 		
-		JOptionPane.showMessageDialog(component, "You have successfully logged off", "Logged off", JOptionPane.INFORMATION_MESSAGE);
-		return true;
+		try {
+			out.println("Bye.");
+			
+			out.close();
+			in.close();
+			clientConnectSocket.close();
+			JOptionPane.showMessageDialog(component, "You have successfully logged off", "Logged off", JOptionPane.INFORMATION_MESSAGE);
+			return true;
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(component, "We could not safely log you out, try again", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
 	}
 	
 	/**
@@ -78,7 +109,22 @@ public abstract class InterfaceLogic {
 	 * @version 1.0
 	 */
 	public static boolean ConnectClientToServer(Component component) {
-		//TODO : Implement the connection to the server.
+		
+		try {
+			clientConnectSocket = new Socket(HOST_NAME, PORT_NUMBER);
+			out = new PrintWriter(clientConnectSocket.getOutputStream(), true);
+			in = new BufferedReader(new InputStreamReader(clientConnectSocket.getInputStream()));
+			
+			do {
+			username = JOptionPane.showInputDialog(component, "Enter your chat alias", "Choose a username", JOptionPane.OK_OPTION);
+			}while(username == null || username.equals(""));
+			
+			out.println(username);
+		}
+		catch(IOException e) {
+			JOptionPane.showMessageDialog(component, "Unable to connect to server, try again later", "Connection Failed", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		
 		JOptionPane.showMessageDialog(component, "Connection Successful - Enjoy chatting!", "Connected", JOptionPane.INFORMATION_MESSAGE);
 		return true;
@@ -95,11 +141,7 @@ public abstract class InterfaceLogic {
 	public static void ListClientsConnected(Component component) {
 		//TODO: Implement the list clients option. The current code is for testing purposes.
 		
-		StringBuilder stringBuilder = new StringBuilder("Currently in the chatroom:\n\n");
-		stringBuilder.append("\u00BB Kaylen Travis Pillay\n");
-		stringBuilder.append("\u00BB Kemira Chetty\n");
-		stringBuilder.append("\u00BB Mpilo Maphanga\n");
-		stringBuilder.append("\n-- FIN --");
+		StringBuilder stringBuilder = new StringBuilder("Feature coming soon! V1.1");
 		
 		JOptionPane.showMessageDialog(component, stringBuilder.toString(), "People connected to the chatroom.", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -195,6 +237,63 @@ public abstract class InterfaceLogic {
 			catch(IOException e) {
 				return false;
 			}
+		}
+		
+	}
+	
+	/**
+	 * Retrieves messages from the server.
+	 * This class implements runnable and can be then used as a thread, to 
+	 * constantly (in the background) check for messages from the server
+	 * and display them to the user. 
+	 * 
+	 * @author Kaylen Travis Pillay
+	 * @version 1.0
+	 */
+	public static class MessageReaderThread implements Runnable{
+
+		private JPanel chatPanel;
+		private JFrame mainContentFrame;
+		
+		/**
+		 * Constructor.
+		 * This constructor takes in the chatPanel and the contentFrame.
+		 * 
+		 * @param chatPanel The panel that displays the messages.
+		 * @param contentFrame The main content pane that is repainted
+		 */
+		public MessageReaderThread(JPanel chatPanel, JFrame contentFrame) {
+			this.chatPanel = chatPanel;
+			this.mainContentFrame = contentFrame;
+		}
+		
+		/**
+		 * Thread run method.
+		 * This method automatically runs when the thread is started. The run
+		 * method constantly reads from the bufferedReader of the client (which
+		 * contain messages from the server) and displays them to the user.
+		 * 
+		 * @author Kaylen Travis Pillay
+		 * @version 1.0
+		 */
+		@Override
+		public void run() {
+			boolean finished = false;
+			while(!finished) {
+				try {
+					String message = in.readLine();
+					if(message != null) {
+						JLabel newMessage = new JLabel(message);
+						chatPanel.add(newMessage);
+						mainContentFrame.validate();
+						mainContentFrame.repaint();
+					}
+				} catch (IOException e) {
+					finished = true;
+					break;
+				}
+			}
+			
 		}
 		
 	}
